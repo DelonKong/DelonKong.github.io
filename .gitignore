@@ -1,0 +1,10 @@
+/tmp
+
+# hugo
+/hugo_stats.json
+/public
+/resources
+
+# private repository
+/content/*/private
+/private
