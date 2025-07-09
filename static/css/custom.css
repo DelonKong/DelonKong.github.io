@@ -1,9 +1,0 @@
-/* 让页面背景变为亮绿色，方便确认样式是否生效 */
-body {
-    background-color: limegreen !important;
-}
-
-/* 给头像添加红色边框 */
-.avatar {
-    border: 5px solid red !important;
-}

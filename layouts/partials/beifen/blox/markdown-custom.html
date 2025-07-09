@@ -1,0 +1,42 @@
+{{/* Hugo Blox: Final Markdown block styled like citation.html */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{ $title := $block.content.title | emojify | $page.RenderString }}
+{{ $subtitle := $block.content.subtitle | emojify | $page.RenderString }}
+{{ $source := $block.content.source | default "news" }}
+{{ $showTitle := $block.content.show_title | default true }}
+{{ $showSubtitle := $block.content.show_subtitle | default false }}
+
+{{ $target := site.GetPage "section" $source }}
+
+
+{{ if not $target }}
+  <div class="text-red-600">❌ Error: Section '{{ $source }}' not found.</div>
+{{ else }}
+
+  <section id="{{ $block.id }}" class="w-full px-4 sm:px-6 lg:px-8 mb-2">
+
+    <div class="max-w-3xl mx-auto">
+
+      {{ if $showTitle }}
+        <div class="text-3xl font-bold text-gray-900 dark:text-white text-center mb-2">
+          {{ with $title }}{{ . }}{{ else }}{{ $target.Title }}{{ end }}
+        </div>
+      {{ end }}
+
+      {{ if and $showSubtitle (or $subtitle $target.Params.subtitle) }}
+        <div class="text-2xl font-bold text-gray-900 dark:text-gray-300 text-center mb-4">
+          {{ with $subtitle }}{{ . }}{{ else }}{{ $target.Params.subtitle }}{{ end }}
+        </div>
+      {{ end }}
+
+      <div class="prose dark:prose-invert mt-8 text-base leading-snug w-full max-w-none text-left" >
+        {{ $target.Content }}
+      </div>
+
+    </div>
+  </section>
+
+{{ end }}

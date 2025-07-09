@@ -3,7 +3,7 @@
 title: Delong Kong
 
 # Name pronunciation (optional)
-name_pronunciation: ''
+name_pronunciation: '孔德龙'
 
 # Full name (for SEO)
 # first_name: diudiu
@@ -11,8 +11,8 @@ name_pronunciation: ''
 
 # Status emoji
 status:
-  icon: <font color=#008000><b>AI.</b></font>
-#  icon: ☕️
+#  icon: <font color=#008000><b>AI.</b></font>
+  icon: ☕️
 
 # Is this the primary user of the site?
 superuser: true
@@ -72,9 +72,9 @@ education:
       GPA: 3.91/4.0
 
       Courses included:
-      - C语言课程设计、Java开发、数据库系统概论、数据结构
-      - 算法设计与分析、计算机操作系统、计算机网络、机器学习
-      - 人工智能、大数据分析技术、大数据医疗交通应用
+      - 人工智能、深度学习、数字图像处理
+      - 算法设计与分析、软件开发方法学、软件体系结构
+
 
   - area: BEng | Computer Science
     institution: Qingdao University
@@ -84,8 +84,9 @@ education:
       GPA: 3.59/4.0
       
       Courses included:
-      - 人工智能、深度学习、数字图像处理
-      - 算法设计与分析、软件开发方法学、软件体系结构
+      - C语言课程设计、Java开发、数据库系统概论、数据结构
+      - 算法设计与分析、计算机操作系统、计算机网络、机器学习
+      - 人工智能、大数据分析技术、大数据医疗交通应用
 
 work:
   - position: 校园实践
@@ -95,7 +96,6 @@ work:
     company_url: ''
     company_logo: ''
     summary: |2-
-       - 2025年6月--，青岛大学计算机科学技术学院校友会2025届校友分会副会长
        - 2022年9月--2025年6月，计算机科学技术学院2022级专硕2班班长 
        - 2023年6月--2024年6月，计算机科学技术学院研究生会执行主席 
        - 2023年6月--2024年6月，青岛大学维C志愿者协会副会长
@@ -103,6 +103,8 @@ work:
 
 # Skills
 # Add your own SVG icons to `assets/media/icons/`
+# https://docs.hugoblox.com/getting-started/page-builder/
+# 搜索icons
 skills:
   - name: Technical Skills
     items:
@@ -113,7 +115,7 @@ skills:
       - name: Deep Learning
         description: ''
         percent: 80
-        icon: deep-learning
+        icon: cpu-chip
       - name: Data Analysis
         description: ''
         percent: 40
@@ -122,24 +124,24 @@ skills:
     color: '#eeac02'
     color_border: '#f0bf23'
     items:
-      - name: Hiking
+      - name: Film
         description: ''
         percent: 40
-        icon: person-simple-walk
-      - name: Basketball
+        icon: film
+      - name: Music
         description: ''
         percent: 40
-        icon: basketball
+        icon: musical-note
       - name: Meditation
         description: ''
         percent: 100
-        icon: camera
+        icon: user-plus
 
 languages:
   - name: English
-    percent: 75
+    percent: 50
   - name: Chinese
-    percent: 100
+    percent: 75
 
 # Awards.
 #   Add/remove as many awards below as you like.

@@ -1,0 +1,18 @@
+
+
+
+
+{{ $columns := .config.columns | default 3 }}
+{{ $len := .config.len | default 3 }}
+{{/* NOTE: dynamic `md:grid-cols-{{$columns}}` class requires Tailwind exception */}}
+
+{{ $centered := .config.center | default true }}
+
+{{/* 如果居中：使用 container + max-width；否则：使用 w-full 宽屏展示 */}}
+{{ $container_class := cond $centered "container mx-auto max-w-screen-lg" "w-full px-4 sm:px-6 lg:px-8" }}
+
+
+<div class="{{ $container_class }} py-5 lg:py-8 ">
+  <div class="grid gap-10 md:grid-cols-{{ $columns }} lg:gap-10">
+
+

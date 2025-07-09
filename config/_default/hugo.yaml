@@ -4,9 +4,9 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 # Website name
-title: Delong Kong (孔德龙)
+title: Delong Kong (孔德龙) | Homepage
 # Website URL
-baseURL: 'https://delonkong.github.io/
+baseURL: 'https://delonkong.github.io/'
 
 ############################
 ## LANGUAGE
@@ -55,10 +55,5 @@ security:
 sitemap:
   _merge: deep
 
-params:
-  icons:
-    throw_on_error: true
-  assets:
-    custom_css:
-      - css/custom.css
+
 

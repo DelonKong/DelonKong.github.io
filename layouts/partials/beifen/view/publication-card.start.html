@@ -1,0 +1,16 @@
+{{ $columns := .config.columns | default 1 }}
+{{ $len := .config.len | default 1 }}
+{{/* NOTE: dynamic `md:grid-cols-{{$columns}}` class requires Tailwind exception */}}
+<!-- <div class="container px-8 mx-auto xl:px-5 py-5 lg:py-8 {{ if eq $len 1 }}max-w-[500px] justify-center{{else}}max-w-screen-lg {{end}}">
+  <div class="grid gap-10 md:grid-cols-{{$columns}} lg:gap-10"> -->
+
+
+<!-- 保持宽度不变，不管文章数是多少 -->
+<!-- 宽屏 -->
+<div class="container px-8 mx-auto xl:px-5 py-5 lg:py-8 max-w-screen-lg flex flex-col gap-12" >
+
+<!-- 窄屏 -->
+<!-- <div class="container px-8 mx-auto xl:px-5 py-5 lg:py-8 max-w-screen-md justify-center"> -->
+
+
+  

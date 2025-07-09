@@ -1,0 +1,17 @@
+example：
+
+
+---
+sections:
+  - block: collection
+    id: papers
+    content:
+      title: Recent Publications
+      filters:
+        folders:
+          - publication
+        featured_only: true
+    design:
+      view: community/publication-card # citation, article-grid
+      columns: '1'  # must be '1'
+---

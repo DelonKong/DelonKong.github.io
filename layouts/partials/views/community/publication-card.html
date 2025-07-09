@@ -1,0 +1,136 @@
+{{ $item := .item }}
+{{ $fill_image := .config.fill_image | default true }}
+
+{{ $resource := partial "functions/get_featured_image.html" $item }}
+{{ $anchor := $item.Params.image.focal_point | default "Center" }}
+
+{{ $link := $item.Params.external_link | default $item.RelPermalink }}
+{{ $target := "" }}
+{{ if $item.Params.external_link }}
+  {{ $link = $item.Params.external_link }}
+  {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+{{ end }}
+<div class="w-full">
+<div class="group cursor-pointer flex flex-col md:flex-row items-center gap-6 relative">
+    <!-- 期刊年份标签（左上角） -->
+    {{ if or $item.Params.publication_short $item.Date }}
+        <div class="absolute top-0 left-0 bg-gray-800 text-white px-3 py-1 text-xs font-bold z-10">
+            {{ with $item.Params.publication_short }}{{ . | upper }}{{ else }}{{ with $item.Params.publication }}{{ . | truncate 10 | upper }}{{ end }}{{ end }}
+            {{ with $item.Date }}{{ . | time.Format "2006" }}{{ end }}
+        </div>
+    {{ end }}
+
+    <!-- ESI 标签，固定在图片左下角 -->
+    {{ if eq $item.Params.ESI "true" }}
+        <div class="absolute bottom-0 left-0 bg-gray-800 text-white px-1 py-1 text-xs font-bold z-10">
+        🏆 ESI Highly Cited Paper
+        </div>
+    {{ end }}
+
+    <!-- 左侧图片区域 -->
+    <div class="w-full md:w-1/3">
+        {{ with $resource }}
+        {{ $image := . }}  <!-- 原始图片，不裁剪不处理 -->
+        {{ if ne $image.MediaType.SubType "gif" }}
+            {{ $image = $image.Process "webp" }}
+        {{ end }}
+
+            <!-- 固定尺寸、统一比例的容器 -->
+            <div class="relative aspect-[4/3] self-start overflow-hidden rounded-md bg-white dark:bg-gray-900 transition-all hover:scale-105">
+                <!-- 已取消跳转链接 -->
+                <img alt="{{ $item.Title | plainify }}"
+                    class="object-contain w-full h-full transition-all"
+                    loading="lazy"
+                    src="{{ $image.RelPermalink }}">
+            </div>
+        {{ end }}
+    </div>
+
+
+    <!-- 右侧内容区域 -->
+    <div class="w-full md:w-2/3">
+        {{ $tags := $item.GetTerms "tags" }}
+        
+        {{ if gt (len $tags) 0 }}
+            <div class="flex gap-3 items-start">
+                {{ range $index, $value := first 1 $tags }}
+                    <a href="{{.RelPermalink}}">
+                        <span class="inline-block text-xs font-medium tracking-wider uppercase mt-1 text-primary-700 dark:text-primary-300">{{ .Page.LinkTitle }}</span>
+                    </a>
+                {{ end }}
+            </div>
+        {{ end }}
+
+        <h2 class="text-lg font-semibold leading-snug tracking-tight mt-2 dark:text-white" >
+            <!-- 已取消跳转链接 -->
+            <span class="bg-gradient-to-r from-primary-200 to-primary-100 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px] dark:from-primary-800 dark:to-primary-900">
+                {{- $item.Title -}}
+                {{if $target}}{{ partial "functions/get_icon" (dict "name" "arrow-top-right-on-square" "attributes" "style=\"height: 1em;\" class=\"inline-flex h-6 w-6 pl-2\"")  }}{{end}}
+            </span>
+        </h2>
+
+        <div class="grow" >
+            <p class="mt-2 line-clamp-3 text-sm text-gray-500 dark:text-gray-400">
+                {{ ($item.Params.summary | default $item.Summary) | plainify | htmlUnescape | chomp }}
+            </p>
+        </div>
+    
+    
+        <!-- 资源链接按钮区域 -->
+        <!-- 原版作者列表+按钮区域 -->
+        <div class="mt-2 flex flex-wrap gap-3">
+            {{ $item := .item }}
+            {{ $has_attachments := partial "functions/has_attachments" $item }}
+            
+            <div class="pub-list-item view-citation" style="margin-bottom: 1rem">
+                <i class="far fa-file-alt pub-icon" aria-hidden="true"></i>
+                <span class="article-metadata li-cite-author">
+                    {{ $authors := $item.GetTerms "authors" }}
+                    {{ $authorNotes := $item.Params.author_notes }}
+                    {{ $equalContributors := slice }}
+                    
+                    <!-- 识别共同一作 -->
+                    {{ range $index, $note := $authorNotes }}
+                        {{ if eq $note "Equal contribution" }}
+                            {{ $equalContributors = $equalContributors | append $index }}
+                        {{ end }}
+                    {{ end }}
+                    
+                    <!-- 生成作者列表 -->
+                    {{ range $index, $author := $authors }}
+                        {{ $isFirstAuthor := eq $index 0 }}
+                        {{ $isEqualContributor := in $equalContributors $index }}
+                        
+                        <span class="author-item">
+                            {{ if or $isFirstAuthor $isEqualContributor }}
+                                <strong>{{ $author.Page.LinkTitle }}</strong>
+                            {{ else }}
+                                {{ $author.Page.LinkTitle }}
+                            {{ end }}
+                            
+                            {{ if $isEqualContributor }}<sup>†</sup>{{ end }}
+                            
+                            {{ if not (eq (add $index 1) (len $authors)) }}, {{ end }}
+                        </span>
+                    {{ end }}
+                </span>
+            
+                <!-- 共同作者说明 -->
+                {{ if gt (len $equalContributors) 0 }}
+                    <div class="co-author-note text-xs text-gray-600 mt-1">
+                        <sup>†</sup> Equal contribution
+                    </div>
+                {{ end }}
+
+
+                <!-- 原版按钮区域 -->
+                {{ if $has_attachments }}
+                    <div class="flex flex-wrap space-x-3 mt-3">
+                        {{ partial "page_links" (dict "page" $item "is_list" 1) }}
+                    </div>
+                {{ end }}
+            </div>      
+      
+    </div>
+</div>
+</div>

@@ -1,0 +1,86 @@
+{{/* Hugo View: coauthors-card.html */}}
+{{ $item := .item }}
+
+
+{{ $avatar := $item.Resources.GetMatch "avatar*" }}
+
+{{ $fit_size := .config.avatar_fit | default "443x600" }}
+{{ $resized := $avatar.Fit $fit_size }}
+{{ $avatar_width := .config.avatar_width | default "200px" }}
+{{ $avatar_shape := .config.avatar_shape | default "rounded-lg" }}  {{/* Tailwind 圆角形状  "rounded-full"、"rounded-lg"、"rounded-none"*/}}
+
+
+
+<div class="group bg-white dark:bg-gray-900 rounded-xl shadow p-5 flex flex-col items-center text-center transition-all hover:shadow-lg">
+
+  {{/* 📸 头像处理：从资源中找 avatar，裁剪+webp */}}
+  {{ if $avatar }}
+    {{ if ne $avatar.MediaType.SubType "gif" }}
+      {{ $avatar = $avatar.Process "webp" }}
+    {{ end }}
+  <img src="{{ $resized.RelPermalink }}"
+     alt="avatar of {{ $item.Title }}"
+     style="width: {{ $avatar_width }}"
+     class="{{ $avatar_shape }} shadow dark:border dark:border-gray-700">
+
+
+  {{ else }}
+    <div class="w-full h-[300px] bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center text-sm text-gray-400">
+      No avatar found
+    </div>
+  {{ end }}
+
+  {{/* 🧑 姓名 Title */}}
+  <h3 class="mt-4 text-xl font-semibold text-gray-900 dark:text-white">{{ $item.Title }}</h3>
+
+  {{/* 📢 拼音 + 职称 */}}
+  {{ with $item.Params.name_pronunciation }}
+    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ . }}</p>
+  {{ end }}
+
+  {{ with $item.Params.role }}
+    <p class="text-sm text-gray-600 dark:text-gray-300">{{ . }}</p>
+  {{ end }}
+
+  {{/* 🏫 单位 - 取第一个 */}}
+  {{ with index ($item.Params.organizations) 0 }}
+    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+      <a href="{{ .url }}" target="_blank" rel="noopener" class="hover:underline">
+        {{ .name }}
+      </a>
+    </p>
+  {{ end }}
+
+  {{/* 💬 quote */}}
+  {{ with $item.Params.quote }}
+    <blockquote class="mt-3 text-sm text-gray-800 dark:text-gray-100">
+      {{ . | markdownify }}
+    </blockquote>
+  {{ end }}
+
+  {{/* 🔗 社交链接 */}}
+  {{ with $item.Params.profiles }}
+    <div class="mt-4 flex flex-wrap justify-center gap-3">
+      {{ range . }}
+        <a href="{{ .url }}" target="_blank" rel="noopener"
+           class="">
+          {{ partial "functions/get_icon.html" (dict "name" .icon "attributes" "class=\"w-5 h-5\"") }}
+        </a>
+      {{ end }}
+    </div>
+  {{ end }}
+</div>
+
+<div class="group bg-white dark:bg-gray-900 rounded-xl shadow p-5 flex flex-col items-center text-center transition-all hover:shadow-lg">
+  {{/* 💬 Message */}}
+  {{ with $item.Params.Message.words }}
+    <blockquote class="mt-4 text-base font-semibold text-gray-900 dark:text-white">
+      {{ . | markdownify }}
+    </blockquote>
+    {{ end }}
+    {{ with $item.Params.Message.translation }}
+    <blockquote class="mt-3 text-sm text-gray-800 dark:text-gray-100">
+    {{ . | markdownify }}
+    </blockquote>
+  {{ end }}
+</div>
