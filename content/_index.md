@@ -123,7 +123,7 @@ sections:
   - block: collection
     id: blogs
     content:
-      title: 🗃 Blogs
+      title: 🗃 Blogs & Notes
       count: 6
       filters:
         folders:
