@@ -6,7 +6,8 @@
 # Website name
 title: Delong Kong (孔德龙) | Homepage
 # Website URL
-baseURL: 'https://delonkong.github.io/'
+# baseURL: 'https://delonkong.github.io/'
+baseURL: 'https://kongdelong.cn/'
 
 ############################
 ## LANGUAGE
