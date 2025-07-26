@@ -1,0 +1,23 @@
+{{/* Hugo Blox: Responsive Image Block (standard width, not fullscreen) */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{ $image := $block.content.image }}
+{{ $alt := $block.content.alt | default "image" }}
+{{ $padding := $block.content.padding | default "0" }}
+
+{{ if not $image }}
+  <div class="text-red-600">❌ Error: Image path not provided in block config.</div>
+{{ else }}
+
+  <section id="{{ $block.id }}" class="w-full px-4 sm:px-6 lg:px-8 mb-4">
+    <div class="max-w-3xl mx-auto">
+      <img src="{{ $image | relURL }}"
+           alt="{{ $alt }}"
+           class="h-auto object-contain rounded-xl shadow"
+           style="width: 100%; padding: {{ $padding }};" />
+    </div>
+  </section>
+
+{{ end }}

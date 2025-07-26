@@ -8,3 +8,5 @@ hero.html 用于生成一个精美的“英雄横幅”（Hero Banner），通�
 stats.html 以整齐的网格方式展示若干项统计数据
 
 testimonials.html 展示一个或多个人物推荐语（带头像、姓名、职称、引用语）
+
+image-fullscreen.html 展示一个图片页面，可以自适应缩放移动端大小

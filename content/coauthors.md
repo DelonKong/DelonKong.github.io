@@ -21,6 +21,13 @@ sections:
     logic:
       filter_packet: false 
 
+  - block: image-fullscreen
+    content:
+      image: authors/Fighting.png
+    alt: Full width banner
+    padding: "0"  # 可选：比如 "1rem" 添加上下内边距
+
+
   #  - block: testimonials
   #    content:
   #      items:
@@ -45,6 +52,7 @@ sections:
   #     center: false # 控制是否居中（true=固定宽度居中，false=全屏）
   #   logic:
   #     filter_packet: true
+
 
 
 ---
