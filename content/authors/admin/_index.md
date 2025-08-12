@@ -165,4 +165,4 @@ awards:
 
 ## About Me
 
-**Delong Kong received the M.E. degree in computer science and technology, in 2025, from the College of Computer Science and Technology, Qingdao University, Qingdao, China, where he is currently working toward the Ph.D. degree in software engineering. His research interests mainly include computer vision, deep learning, and hyperspectral image interpretation.**
+**Delong Kong received the M.E. degree in software engineering, in 2025, from the College of Computer Science and Technology, Qingdao University, Qingdao, China, where he is currently working toward the Ph.D. degree in software engineering. His research interests mainly include computer vision, deep learning, and hyperspectral image interpretation.**
